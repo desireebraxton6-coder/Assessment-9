@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form id="registrationForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required minlength="3" 
+           pattern="[A-Za-z0-9]{3,}" title="At least 3 characters. Letters and digits only."><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required minlength="8" 
+           title="Password must be at least 8 characters."><br><br>
+
+    <label for="verifyPassword">Verify Password:</label>
+    <input type="password" id="verifyPassword" name="verifyPassword" required minlength="8" 
+           title="Must match password and be at least 8 characters."><br><br>
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required minlength="1"><br><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required minlength="1"><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" 
+           pattern="\(\d{3}\) \d{3}-\d{4}" placeholder="(234) 555-1212" 
+           title="Format: (234) 555-1212"><br><br>
+
+    <button type="submit" id="submitButton">Register</button>
+  </form>
+
+  <div id="resultMessage"></div>
+
+  <script src="js/registration.js"></script>
+</body>
+</html>
