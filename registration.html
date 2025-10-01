@@ -1,98 +1,45 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("reg-form");
-  const password = document.getElementById("password");
-  const verifyPassword = document.getElementById("verify-password");
-  const resultMessage = document.getElementById("result-message");
-  const submitButton = document.getElementById("submit");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form id="registrationForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required minlength="3" 
+           pattern="[A-Za-z0-9]{3,}" title="At least 3 characters. Letters and digits only."><br><br>
 
-  function clearErrors() {
-    document.querySelectorAll(".error").forEach((el) => el.remove());
-  }
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required minlength="8" 
+           title="Password must be at least 8 characters."><br><br>
 
-  function showError(input, message) {
-    const error = document.createElement("span");
-    error.classList.add("error");
-    error.style.color = "red";
-    error.textContent = message;
-    input.insertAdjacentElement("afterend", error);
-  }
+    <label for="verifyPassword">Verify Password:</label>
+    <input type="password" id="verifyPassword" name="verifyPassword" required minlength="8" 
+           title="Must match password and be at least 8 characters."><br><br>
 
-  function checkPassword() {
-    if (password.value.length < 8) {
-      showError(password, "Password must be at least 8 characters.");
-      return false;
-    }
-    if (verifyPassword.value.length < 8) {
-      showError(
-        verifyPassword,
-        "Password verification must be at least 8 characters."
-      );
-      return false;
-    }
-    if (password.value !== verifyPassword.value) {
-      showError(verifyPassword, "Passwords do not match.");
-      return false;
-    }
-    return true;
-  }
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required minlength="1"><br><br>
 
-  function validateForm() {
-    let valid = true;
-    clearErrors();
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required minlength="1"><br><br>
 
-    const inputs = form.querySelectorAll("input[required]");
-    inputs.forEach((input) => {
-      if (!input.value.trim()) {
-        showError(input, `${input.name || input.id} is required.`);
-        valid = false;
-      } else if (!input.checkValidity()) {
-        showError(input, `Invalid ${input.name || input.id} format.`);
-        valid = false;
-      }
-    });
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
 
-    if (!checkPassword()) {
-      valid = false;
-    }
-    return valid;
-  }
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" 
+           pattern="\(\d{3}\) \d{3}-\d{4}" placeholder="(234) 555-1212" 
+           title="Format: (234) 555-1212"><br><br>
 
-  function writeCookieData() {
-    const inputs = form.querySelectorAll("input");
-    // clear old cookies
-    inputs.forEach((input) => {
-      if (input.type !== "submit" && input.type !== "button") {
-        document.cookie =
-          input.id + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      }
-    });
+    <button type="submit" id="submitButton">Register</button>
+  </form>
 
-    // write new cookies
-    inputs.forEach((input) => {
-      if (input.type !== "submit" && input.type !== "button") {
-        document.cookie =
-          input.id + "=" + encodeURIComponent(input.value) + "; path=/;";
-      }
-    });
+  <div id="resultMessage"></div>
 
-    // show success before submitting
-    resultMessage.style.color = "green";
-    resultMessage.textContent =
-      "Registration completed successfully! Redirecting…";
-
-    // small delay so user sees success message before moving to confirm.html
-    setTimeout(() => form.submit(), 1000);
-  }
-
-  submitButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    resultMessage.textContent = ""; // clear old messages
-    resultMessage.style.color = "red";
-
-    if (validateForm()) {
-      writeCookieData();
-    } else {
-      resultMessage.textContent = "Please fix the errors above.";
-    }
-  });
-});
+  <script src="js/registration.js"></script>
+</body>
+</html>
